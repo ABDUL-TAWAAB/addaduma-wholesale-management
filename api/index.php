@@ -1,4 +1,16 @@
 <?php
+// THIS IS THE API AND SEND AND RECIEVE DATA FROM THE DATABASE USING MYSQL QUERIES
+// INFORMATIONS STORE AND DISPLAYED ON THE UI IS GOTTEN FROM THIS PAGE WITH THE HELP OF
+// MYSQL QUERIES COMMUNICATING WITH THE DATABASE
+session_start();
+if (!isset($_SESSION["staff_id"])) {
+    http_response_code(401);
+    echo json_encode([
+        "message" => "You must login first"
+    ]);
+    exit;
+}
+
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
@@ -651,12 +663,13 @@ function handleStaff($db, string $method, ?int $id): void
     if ($method === 'POST') {
         $body = getJsonBody();
 
-        $stmt = db_prepare($db, 'INSERT INTO staff (name, phone, role, email) VALUES (?, ?, ?, ?)');
+        $stmt = db_prepare($db, 'INSERT INTO staff (name, phone, role, email, password_hash) VALUES (?, ?, ?, ?, ?)');
         db_execute($stmt, [
             $body['name'] ?? null,
             $body['phone'] ?? null,
             $body['role'] ?? null,
             $body['email'] ?? null,
+            $body['password_hash'] ?? null,
         ]);
 
         handleStaff($db, 'GET', (int) db_last_insert_id($db));
@@ -665,7 +678,7 @@ function handleStaff($db, string $method, ?int $id): void
 
     if ($method === 'PUT' && $id) {
         $body = getJsonBody();
-        $fields = ['name', 'phone', 'role', 'email'];
+        $fields = ['name', 'phone', 'role', 'email', 'password_hash'];
         $updateParts = buildUpdateParts($body, $fields);
 
         if ($updateParts['setClauses'] === []) {

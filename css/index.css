@@ -43,7 +43,7 @@ label{
     margin-bottom:7px;
     font-weight:bold;
 }
-input{
+input[type="text"], input[type="password"]{
     width:100%;
     padding:15px;
     border:1px solid #ccc;
@@ -60,8 +60,27 @@ input:focus{
     margin:20px 0;
     font-size:15px;
 }
+.remember div{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    gap:5px;
+}
 .remember a{
     text-decoration:none;
+    color:#0d47a1;
+}
+
+.showAuthentication{
+    font-size:25px;
+    margin-bottom:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-top:20px;
+    font-weight:bold;
     color:#0d47a1;
 }
 button{
@@ -116,6 +135,11 @@ button:hover{
     border-radius:12px;
     text-align:center;
 }
+.box i{
+    font-size:50px;
+    margin-bottom:5px;
+}
+
 .box h3{
     margin:15px 0;
 }

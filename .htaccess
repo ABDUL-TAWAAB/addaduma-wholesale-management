@@ -1,11 +1,15 @@
-RewriteEngine On
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /addaduma-wholesale-system/
+    
+    # Don't rewrite real files or directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Rewrite API requests to api/index.php and pass the path as a query parameter
+    RewriteRule ^api/(.+)$ api/index.php?path=$1 [QSA,L]
+</IfModule>
 
-# Route /api/* to api/index.php with a query parameter
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^api/(.*)$ api/index.php?path=$1 [QSA,L]
+# Disable directory listing
+Options -Indexes
 
-# Serve the app entry point for all other requests
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.html [L]

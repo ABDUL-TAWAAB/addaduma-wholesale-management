@@ -1,3 +1,16 @@
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+header("Expires: 0");
+
+
+session_start();
+if (!isset($_SESSION["staff_id"])) {
+    header("Location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +21,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+  <script defer>
+const currentUser = {
+    id: <?= json_encode($_SESSION["staff_id"]) ?>,
+    name: <?= json_encode($_SESSION["staff_name"]) ?>,
+    role: <?= json_encode($_SESSION["staff_role"]) ?>
+};
+
+
+</script>
   <div class="app-container">
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
@@ -37,11 +59,21 @@
         <a href="#" class="nav-link" data-page="customers">
           <i class="fas fa-users"></i><span>Customers</span>
         </a>
-        <a href="#" class="nav-link" data-page="staff">
+        <a href="#" class="nav-link" data-page="staff" id="staff">
           <i class="fas fa-user-tie"></i><span>Staff</span>
+          <script>
+            if (currentUser.role !== "Administrator") {
+              document.getElementById('staff').style.display = 'none';
+            }
+            </script>
         </a>
-        <a href="#" class="nav-link" data-page="inventory">
+        <a href="#" class="nav-link" data-page="inventory" id="inventory">
           <i class="fas fa-warehouse"></i><span>Inventory</span>
+          <script>
+            if (currentUser.role !== "Administrator" && currentUser.role !== "Manager") {
+              document.getElementById('inventory').style.display = 'none';
+            }
+          </script>
         </a>
         <a href="#" class="nav-link" data-page="orders">
           <i class="fas fa-shopping-cart"></i><span>Orders</span>
@@ -52,17 +84,22 @@
         <a href="#" class="nav-link" data-page="invoices">
           <i class="fas fa-file-invoice"></i><span>Invoices</span>
         </a>
-        <a href="#" class="nav-link" data-page="reports">
+        <a href="#" class="nav-link" data-page="reports" id="reports">
           <i class="fas fa-chart-bar"></i><span>Reports</span>
+          <script>
+            if (currentUser.role !== "Administrator" && currentUser) {
+              document.getElementById('reports').style.display = 'none';
+            }
+          </script>
         </a>
-        <a href="#" class="nav-link logout" id="logoutBtn">
+        <a href="" class="nav-link logout" id="logoutBtn">
           <i class="fas fa-sign-out-alt"></i><span>Logout</span>
         </a>
       </nav>
 
       <div class="sidebar-footer">
-        <p><i class="fas fa-map-marker-alt"></i> 123 Business Street, Accra</p>
-        <p><i class="fas fa-phone"></i> +233 30 123 4567</p>
+        <p><i class="fas fa-map-marker-alt"></i> Tanoso, Kumasi</p>
+        <p><i class="fas fa-phone"></i> +233 53 1691 093</p>
         <p><i class="fas fa-envelope"></i> info@addaduma.com</p>
       </div>
     </aside>
@@ -84,8 +121,8 @@
           <div class="user-profile">
             <img src="https://ui-avatars.com/api/?name=Admin+User&background=1e3a5f&color=fff" alt="Admin User">
             <div class="user-info">
-              <span class="user-name">Admin User</span>
-              <span class="user-role">Administrator</span>
+              <span class="user-name"><?php echo $_SESSION["staff_name"]; ?></span>
+              <span class="user-role"><?php echo $_SESSION["staff_role"]; ?></span>
             </div>
           </div>
         </div>

@@ -1,5 +1,7 @@
--- -- Sample seed data for development and testing
--- USE `addaduma-wholesale_system`;
+-- this file contain Sample data for development and testing
+
+
+-- USE `addaduma-wholesale_system`; 
 
 -- INSERT INTO categories (name) VALUES
 -- ('Beverages'), ('Snacks'), ('Household'), ('Personal Care'), ('Frozen Foods');

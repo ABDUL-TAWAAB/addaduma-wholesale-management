@@ -1,3 +1,5 @@
+// THIS PAGE THIS PAGE IS USED TO GET HTTP REQUEST AND HANDLE THE API
+
 const API = {
   USE_API: true,
 
@@ -44,19 +46,32 @@ const API = {
       config.body = JSON.stringify(config.body);
     }
 
+    const method = (options.method || 'GET').toUpperCase();
+    const urls = this.getRequestUrls(endpoint);
+    
+    // For DELETE and PUT requests, prioritize the query string URL (more reliable with .htaccess)
+    if (method === 'DELETE' || method === 'PUT') {
+      urls.reverse();
+    }
+
     let lastResponse = null;
-    for (const url of this.getRequestUrls(endpoint)) {
-      const response = await fetch(url, config);
-      if (response.ok) {
-        return response.json();
-      }
-      lastResponse = response;
-      if (response.status !== 404) {
-        break;
+    for (const url of urls) {
+      try {
+        const response = await fetch(url, config);
+        if (response.ok) {
+          return response.json();
+        }
+        lastResponse = response;
+        // Continue trying other URLs even on 405, but break on other client errors
+        if (response.status !== 404 && response.status !== 405) {
+          break;
+        }
+      } catch (error) {
+        lastResponse = error;
       }
     }
 
-    const error = await lastResponse?.json().catch(() => ({}));
+    const error = await lastResponse?.json?.().catch(() => ({}));
     throw new Error(error.message || `API Error: ${lastResponse?.status || 404}`);
   },
 

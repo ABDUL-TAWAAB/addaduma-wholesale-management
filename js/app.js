@@ -1,6 +1,6 @@
-// import { API } from './api.js';
-// Shared client-side state for the dashboard and CRUD screens.
-// The previous UI code expects this object to exist before any page renders.
+//THE CODES IN THIS FILE IS USED TO ADD ENTERACTION WITH THE SYSTEM
+
+
 const DB = {
   categories: [],
   suppliers: [],
@@ -55,7 +55,9 @@ const App = {
 
     document.getElementById('logoutBtn').addEventListener('click', (e) => {
       e.preventDefault();
-      this.showToast('Logged out successfully', 'info');
+      if (confirm('Are you sure you want to logout?')) {
+        window.location.href = 'logout.php';
+      }
     });
 
     document.addEventListener('click', (e) => {
@@ -541,7 +543,6 @@ const App = {
           <div class="action-buttons">
             <button class="btn btn-sm btn-view" data-action="view" data-entity="order" data-id="${o.id}">View</button>
             <button class="btn btn-sm btn-invoice" data-action="invoice" data-id="${o.id}">Invoice</button>
-            <button class="btn btn-sm btn-warning" data-action="update-status" data-id="${o.id}"> Update Status </button>
           </div>
         </td>
       </tr>`).join('');
@@ -589,7 +590,6 @@ const App = {
           <div class="action-buttons">
             <button class="btn btn-sm btn-view" data-action="view" data-entity="invoice" data-id="${i.id}">View</button>
             <button class="btn btn-sm btn-print" data-action="print" data-entity="invoice" data-id="${i.id}">Print</button>
-            <button class="btn btn-sm btn-delete" data-action="pdf" data-entity="invoice" data-id="${i.id}">PDF</button>
           </div>
         </td>
       </tr>`).join('');
@@ -891,6 +891,8 @@ async generateReport(type) {
               <input name="name" value="${s.name || ''}" required>
               <label>Staff Email</label>
               <input name="email" value="${s.email || ''}" required>
+              <label>Staff Password</label>
+              <input name="password_hash" type="password" value="${s.password_hash || ''}" required>
             </div>
 
             <div class="form-row">

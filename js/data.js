@@ -1,6 +1,5 @@
-// /**
-//  * Mock data store - mirrors SQL database schema
-//  * Replace with API calls when backend is connected
+// /*
+//    this where the data we used when building to help communcate with backed
 //  */
 
 // const DB = {
@@ -107,7 +106,9 @@
 //   return Math.max(...DB[table].map(item => item.id)) + 1;
 // }
 
-// Lookup helpers
+
+
+//helpers funtions
 function getCategoryName(id) {
   const cat = DB.categories.find(c => c.id === id);
   return cat ? cat.name : 'Unknown';
