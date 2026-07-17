@@ -1,0 +1,38 @@
+body{
+    font-family:Arial;
+    background:#eee;
+}
+.receipt{
+    width:500px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border:1px solid #ddd;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+td{
+    padding:8px;
+}
+h2,h3{
+    text-align:center;
+}
+button{
+    margin-top:20px;
+}
+@media print{
+button{
+display:none;
+}
+body{
+background:white;
+}
+.receipt{
+border:none;
+margin:0;
+width:100%;
+}
+
+}

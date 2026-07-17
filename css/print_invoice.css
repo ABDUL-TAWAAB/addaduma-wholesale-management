@@ -1,0 +1,49 @@
+body{
+    font-family:Arial;
+    background:#eee;
+}
+
+.invoice{
+    width:700px;
+    margin:30px auto;
+    background:#fff;
+    padding:30px;
+    border:1px solid #ccc;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+table,th,td{
+    border:1px solid #999;
+}
+th,td{
+    padding:8px;
+    text-align:left;
+}
+h2,h3{
+    text-align:center;
+}
+.total{
+    text-align:right;
+    margin-top:15px;
+    font-size:18px;
+    font-weight:bold;
+}
+button{
+    margin-top:20px;
+}
+@media print{
+button{
+display:none;
+}
+body{
+background:white;
+}
+.invoice{
+border:none;
+margin:0;
+width:100%;
+}
+}

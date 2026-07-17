@@ -589,7 +589,7 @@ const App = {
         <td>
           <div class="action-buttons">
             <button class="btn btn-sm btn-view" data-action="view" data-entity="invoice" data-id="${i.id}">View</button>
-            <button class="btn btn-sm btn-print" data-action="print" data-entity="invoice" data-id="${i.id}">Print</button>
+            <a href="print_invoice.php?id=${i.id}" target="_blank" class="btn btn-sm btn-print" data-action="print" data-entity="invoice" data-id="${i.id}">Print</a>
           </div>
         </td>
       </tr>`).join('');

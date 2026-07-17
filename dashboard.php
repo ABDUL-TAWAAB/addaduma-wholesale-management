@@ -47,17 +47,31 @@ const currentUser = {
         <a href="#" class="nav-link active" data-page="dashboard">
           <i class="fas fa-th-large"></i><span>Dashboard</span>
         </a>
-        <a href="#" class="nav-link" data-page="products">
-          <i class="fas fa-box"></i><span>Products</span>
+        <a href="#" class="nav-link" data-page="suppliers">
+          <i class="fas fa-truck"></i><span>Suppliers</span>
         </a>
         <a href="#" class="nav-link" data-page="categories">
           <i class="fas fa-tags"></i><span>Categories</span>
         </a>
-        <a href="#" class="nav-link" data-page="suppliers">
-          <i class="fas fa-truck"></i><span>Suppliers</span>
-        </a>
         <a href="#" class="nav-link" data-page="customers">
           <i class="fas fa-users"></i><span>Customers</span>
+        </a>
+        <a href="#" class="nav-link" data-page="products">
+          <i class="fas fa-box"></i><span>Products</span>
+        </a>
+        <a href="#" class="nav-link" data-page="inventory" id="inventory">
+          <i class="fas fa-warehouse"></i><span>Inventory</span>
+          <script>
+            if (currentUser.role !== "Administrator" && currentUser.role !== "Manager") {
+              document.getElementById('inventory').style.display = 'none';
+            }
+            </script>
+        </a>
+        <a href="#" class="nav-link" data-page="orders">
+          <i class="fas fa-shopping-cart"></i><span>Orders</span>
+        </a>
+        <a href="#" class="nav-link" data-page="payments">
+          <i class="fas fa-money-bill-wave"></i><span>Payments</span>
         </a>
         <a href="#" class="nav-link" data-page="staff" id="staff">
           <i class="fas fa-user-tie"></i><span>Staff</span>
@@ -66,20 +80,6 @@ const currentUser = {
               document.getElementById('staff').style.display = 'none';
             }
             </script>
-        </a>
-        <a href="#" class="nav-link" data-page="inventory" id="inventory">
-          <i class="fas fa-warehouse"></i><span>Inventory</span>
-          <script>
-            if (currentUser.role !== "Administrator" && currentUser.role !== "Manager") {
-              document.getElementById('inventory').style.display = 'none';
-            }
-          </script>
-        </a>
-        <a href="#" class="nav-link" data-page="orders">
-          <i class="fas fa-shopping-cart"></i><span>Orders</span>
-        </a>
-        <a href="#" class="nav-link" data-page="payments">
-          <i class="fas fa-money-bill-wave"></i><span>Payments</span>
         </a>
         <a href="#" class="nav-link" data-page="invoices">
           <i class="fas fa-file-invoice"></i><span>Invoices</span>
