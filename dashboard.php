@@ -16,7 +16,7 @@ if (!isset($_SESSION["staff_id"])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ADDADUMA PRESTIGE ENTERPRISE Wholesale Management</title>
+  <title>ADDADUMA PRESTIGE ENTERPRISE Management System</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -87,7 +87,7 @@ const currentUser = {
         <a href="#" class="nav-link" data-page="reports" id="reports">
           <i class="fas fa-chart-bar"></i><span>Reports</span>
           <script>
-            if (currentUser.role !== "Administrator" && currentUser) {
+            if (currentUser.role !== "Administrator" && currentUser.role !== "Manager") {
               document.getElementById('reports').style.display = 'none';
             }
           </script>
@@ -200,6 +200,12 @@ const currentUser = {
                 <option value="">All Suppliers</option>
               </select>
             </div>
+            <!-- ======================= upload excel file to ============================================== -->
+            <!-- <div>
+              <input class="btn btn-primary" type="file" value="upload excel file" id="upload-file">
+              <button type="submit">Upload</button>
+            </div> -->
+             
             <button class="btn btn-primary" data-action="add" data-entity="product">
               <i class="fas fa-plus"></i> Add Product
             </button>

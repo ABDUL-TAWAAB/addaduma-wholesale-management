@@ -662,7 +662,7 @@ function handleStaff($db, string $method, ?int $id): void
 
     if ($method === 'POST') {
         $body = getJsonBody();
-
+        // hash password befor inserting
         $stmt = db_prepare($db, 'INSERT INTO staff (name, phone, role, email, password_hash) VALUES (?, ?, ?, ?, ?)');
         db_execute($stmt, [
             $body['name'] ?? null,
